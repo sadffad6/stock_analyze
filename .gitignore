@@ -1,5 +1,0 @@
-# 忽略Python虚拟环境
-.venv/
-
-# 忽略JetBrains IDE配置（如PyCharm、IntelliJ等）
-.idea/
