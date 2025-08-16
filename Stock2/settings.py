@@ -37,8 +37,20 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    'rest_framework.authtoken',
+    "rest_framework",
+    "user",
+    "compare",
+    "stock"
 ]
-
+REST_FRAMEWORK = {
+    # 配置默认认证方式
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.TokenAuthentication',  # Token认证
+        # 'rest_framework.authentication.SessionAuthentication',  # 可选：Session认证（浏览器用）
+        # 'rest_framework_simplejwt.authentication.JWTAuthentication',  # 若用JWT，需安装simplejwt
+    ],
+}
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
@@ -54,7 +66,8 @@ ROOT_URLCONF = "Stock2.urls"
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [],
+        "DIRS": [BASE_DIR / 'templates']
+        ,
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
@@ -71,11 +84,18 @@ WSGI_APPLICATION = "Stock2.wsgi.application"
 
 # Database
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
-
 DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'stock_analyze',
+        'USER': 'root',
+        'PASSWORD': 'Y1j1i1123',
+        'HOST': 'localhost',
+        'PORT': '3306',
+        'OPTIONS': {
+            'charset': 'utf8mb4',
+            'init_command': "SET sql_mode='STRICT_TRANS_TABLES'"
+        }
     }
 }
 
